@@ -3,8 +3,7 @@ import { matchCommentsAndWhitespace } from '../utils/comments-and-whitespace';
 import { AbstractSyntaxNode, Grammar, compose } from '../utils/grammar';
 import { ParsingContext } from '../utils/parsing-context';
 import { Lambda } from './lambda';
-import { Addition } from './operators/addition';
-import { Multiplication } from './operators/multiplication';
+import { Addition, Conjunction, Contains, Disjunction, Division, Equals, GreaterThan, GreaterThanOrEqual, In, LessThan, LessThanOrEqual, Multiplication, Subtraction } from './operators/binary';
 
 /**
  * A RightFragment is a right-recursive fragment of an expression
@@ -17,9 +16,20 @@ export class RightFragment implements Grammar<'rightFragment'> {
     public context: ParsingContext,
   ) {
     this.grammar = compose('rightFragment')`
-    |${context.get(Multiplication)}${context.get(RightFragment)}
     |${context.get(Addition)}${context.get(RightFragment)}
-    |${context.get(Lambda)}
+    |${context.get(Subtraction)}${context.get(RightFragment)}
+    |${context.get(Multiplication)}${context.get(RightFragment)}
+    |${context.get(Division)}${context.get(RightFragment)}
+    |${context.get(Conjunction)}${context.get(RightFragment)}
+    |${context.get(Disjunction)}${context.get(RightFragment)}
+    |${context.get(Equals)}${context.get(RightFragment)}
+    |${context.get(LessThan)}${context.get(RightFragment)}
+    |${context.get(LessThanOrEqual)}${context.get(RightFragment)}
+    |${context.get(GreaterThan)}${context.get(RightFragment)}
+    |${context.get(GreaterThanOrEqual)}${context.get(RightFragment)}
+    |${context.get(In)}${context.get(RightFragment)}
+    |${context.get(Contains)}${context.get(RightFragment)}
+    |${context.get(Lambda) }
     `;
 
     this.lambdaOnly = compose('rightFragment')`

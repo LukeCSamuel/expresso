@@ -24,7 +24,11 @@ export function and<T extends string = string> (type: T, grammars: Grammar[]): G
       for (const grammar of captured) {
         const result = grammar.match(tokens.slice(matched.length));
         if (result) {
-          children.push(result);
+          if (result.type === type) {
+            children.push(...result.children);
+          } else {
+            children.push(result);
+          }
           matched.push(...result.matched);
         } else {
           return false;

@@ -6,7 +6,8 @@ export type BracketToken = {
 }
 
 export function tryBracketToken (input: string): BracketToken | false {
-  const matches = input.match(/^\[]/);
+  // eslint-disable-next-line unicorn/better-regex
+  const matches = input.match(/^(?:\[|\])/);
   if (matches) {
     return {
       type: 'bracket',

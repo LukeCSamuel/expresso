@@ -6,7 +6,7 @@ type VisitorMap<TRegisteredTypes extends AbstractSyntaxType, TResultMap extends 
   [K in TRegisteredTypes]: VisitorBase<K, TResultMap[K]>
 }
 
-type FilledVisitorRegistry = VisitorRegistry<AbstractSyntaxType, Record<AbstractSyntaxType, Expression>>
+export type FilledVisitorRegistry = VisitorRegistry<AbstractSyntaxType, Record<AbstractSyntaxType, Expression>>
 
 export class VisitorRegistry<TRegisteredTypes extends AbstractSyntaxType = never, TResultMap extends Record<AbstractSyntaxType, Expression> = Record<string, never>> {
   visitors: VisitorMap<TRegisteredTypes, TResultMap> = {} as unknown as VisitorMap<TRegisteredTypes, TResultMap>;

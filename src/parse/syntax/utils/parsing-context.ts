@@ -16,7 +16,7 @@ export class ParsingContext {
   }
 
 
-  get (Grammar: new (context: ParsingContext) => Grammar): Grammar {
+  get<T extends string> (Grammar: new (context: ParsingContext) => Grammar<T>): Grammar<T> {
     if (this.grammars.has(Grammar)) {
       return this.grammars.get(Grammar);
     } else {

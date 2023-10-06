@@ -4,10 +4,10 @@ import { VisitorRegistry } from './visitor-registry';
 import { ExpressionVisitor } from './visitors/expression-visitor';
 import { LambdaVisitor } from './visitors/lambda-visitor';
 import { LeftFragmentVisitor } from './visitors/left-fragment-visitor';
-import { AdditionVisitor } from './visitors/operators/addition-visitor';
+import { AdditionVisitor, ConjunctionVisitor, ContainsVisitor, DisjunctionVisitor, DivisionVisitor, EqualsVisitor, GreaterThanOrEqualVisitor, GreaterThanVisitor, InVisitor, LessThanOrEqualVisitor, LessThanVisitor, MultiplicationVisitor, SubtractionVisitor } from './visitors/operators/binary-visitor';
 import { GroupVisitor } from './visitors/operators/group-visitor';
-import { LogicalNegationVisitor } from './visitors/operators/logical-negation-visitor';
-import { MultiplicationVisitor } from './visitors/operators/multiplication-visitor';
+import { ListVisitor } from './visitors/operators/list-visitor';
+import { LogicalNegationVisitor, NumericalCoercionVisitor, NumericalNegationVisitor } from './visitors/operators/unary-visitor';
 import { RightFragmentVisitor } from './visitors/right-fragment-visitor';
 import { BooleanVisitor } from './visitors/value/boolean-visitor';
 import { IdentifierVisitor } from './visitors/value/identifier-visitor';
@@ -18,7 +18,7 @@ import { ValueVisitor } from './visitors/value/value-visitor';
 
 const registry = new VisitorRegistry()
   // General
-  .register(ExpressionVisitor)
+  .register(ExpressionVisitor) 
   .register(LambdaVisitor)
   .register(LeftFragmentVisitor)
   .register(RightFragmentVisitor)
@@ -29,11 +29,26 @@ const registry = new VisitorRegistry()
   .register(NumberVisitor)
   .register(StringVisitor)
   .register(ValueVisitor)
-  // Operators
-  .register(AdditionVisitor)
+  // Left Fragment Operators
   .register(GroupVisitor)
+  .register(ListVisitor)
   .register(LogicalNegationVisitor)
+  .register(NumericalNegationVisitor)
+  .register(NumericalCoercionVisitor)
+  // Right Fragment Operators
+  .register(AdditionVisitor)
+  .register(SubtractionVisitor)
   .register(MultiplicationVisitor)
+  .register(DivisionVisitor)
+  .register(ConjunctionVisitor)
+  .register(DisjunctionVisitor)
+  .register(EqualsVisitor)
+  .register(LessThanVisitor)
+  .register(LessThanOrEqualVisitor)
+  .register(GreaterThanVisitor)
+  .register(GreaterThanOrEqualVisitor)
+  .register(InVisitor)
+  .register(ContainsVisitor)
   ;
 
 export function transform<T extends AbstractSyntaxType> (ast: AbstractSyntaxNode<T>) {

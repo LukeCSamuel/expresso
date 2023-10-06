@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import { Grammar } from '../utils/grammar';
 import { Expression } from './Expression';
 import { Lambda } from './lambda';
 import { LeftFragment } from './left-fragment';
-import { Addition } from './operators/addition';
+import { Addition, Conjunction, Contains, Disjunction, Division, Equals, GreaterThan, GreaterThanOrEqual, In, LessThan, LessThanOrEqual, Multiplication, Subtraction } from './operators/binary';
 import { Group } from './operators/group';
-import { LogicalNegation } from './operators/logical-negation';
-import { Multiplication } from './operators/multiplication';
+import { List } from './operators/list';
+import { LogicalNegation, NumericalCoercion, NumericalNegation } from './operators/unary-prefix';
 import { RightFragment } from './right-fragment';
 import { GrammarBoolean } from './value/boolean';
 import { Identifier } from './value/identifier';
@@ -14,7 +16,17 @@ import { GrammarNumber } from './value/number';
 import { GrammarString } from './value/string';
 import { Value } from './value/value';
 
-type AbstractSyntaxNodeType<T extends Grammar> = Exclude<ReturnType<T['match']>, false>['type']
+type ConstructorReturnType<T extends any> =
+  T extends new (...args: any[]) => infer R
+  ? R
+  : never
+
+type AbstractSyntaxNodeType<T extends any> =
+  T extends Grammar
+  ? Exclude<ReturnType<T['match']>, false>['type']
+  : T extends new (...args: any[]) => Grammar
+  ? Exclude<ReturnType<ConstructorReturnType<T>['match']>, false>['type']
+  : never
 
 export type AbstractSyntaxType =
   // General
@@ -29,9 +41,24 @@ export type AbstractSyntaxType =
   | AbstractSyntaxNodeType<Identifier>
   | AbstractSyntaxNodeType<Null>
   | AbstractSyntaxNodeType<Value>
-  // Operators
-  | AbstractSyntaxNodeType<Addition>
+  // Left Fragment Operators
   | AbstractSyntaxNodeType<Group>
-  | AbstractSyntaxNodeType<LogicalNegation>
-  | AbstractSyntaxNodeType<Multiplication>
+  | AbstractSyntaxNodeType<List>
+  | AbstractSyntaxNodeType<typeof LogicalNegation>
+  | AbstractSyntaxNodeType<typeof NumericalNegation>
+  | AbstractSyntaxNodeType<typeof NumericalCoercion>
+  // Right Fragment Operators
+  | AbstractSyntaxNodeType<typeof Addition>
+  | AbstractSyntaxNodeType<typeof Subtraction>
+  | AbstractSyntaxNodeType<typeof Multiplication>
+  | AbstractSyntaxNodeType<typeof Division>
+  | AbstractSyntaxNodeType<typeof Conjunction>
+  | AbstractSyntaxNodeType<typeof Disjunction>
+  | AbstractSyntaxNodeType<typeof Equals>
+  | AbstractSyntaxNodeType<typeof LessThan>
+  | AbstractSyntaxNodeType<typeof LessThanOrEqual>
+  | AbstractSyntaxNodeType<typeof GreaterThan>
+  | AbstractSyntaxNodeType<typeof GreaterThanOrEqual>
+  | AbstractSyntaxNodeType<typeof In>
+  | AbstractSyntaxNodeType<typeof Contains>
 
