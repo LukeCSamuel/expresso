@@ -116,7 +116,7 @@ Expresso supports post-compilation transform functions to run on the generated o
 Out of the box, expresso provides the `treatIdentifiersAsArrays` transform function that wraps identifiers in `some` rules if they are part of a boolean rule.  This transform is experimental, so be careful when using it.
 
 ```ts
-import { treatIdentifiersAsArrays } from 'expresso';
+import { treatIdentifiersAsArrays } from 'expresso/post';
 
 expresso('foo in [1, 2, 3]', {
   postCompile: [treatIdentifiersAsArrays],

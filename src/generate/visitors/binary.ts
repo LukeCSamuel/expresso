@@ -1,5 +1,5 @@
 import { RulesLogic } from 'json-logic-js';
-import { VisitorBase } from '../visitor-registry';
+import { VisitorBase, VisitorRegistry } from '../visitor-registry';
 import { AllBinaryExpression, Expression } from '../../parse/transform/expressions';
 
 type BinaryRule =
@@ -21,7 +21,7 @@ interface BinaryOptions {
   inverse?: boolean
 }
 
-function createBinaryVisitor<T extends AllBinaryExpression, TRule extends BinaryRule> (type: T['type'], rule: TRule, { inverse }: BinaryOptions = {}) {
+function createBinaryVisitor<T extends AllBinaryExpression, TRule extends BinaryRule> (type: T['type'], rule: TRule, { inverse }: BinaryOptions = {}): new (registry: VisitorRegistry) => VisitorBase<T> {
   return class extends VisitorBase<T> {
     type = type;
     visit (expression: T): RulesLogic {

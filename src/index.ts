@@ -10,8 +10,6 @@ import { PostCompilationTransform } from './post';
 import { Token } from './parse/lexer/tokens';
 import { AbstractSyntaxNode } from './parse/syntax/utils/grammar';
 
-export * from './post';
-
 export interface ExpressoOptions {
   logErrors?: boolean
   throwParseErrors?: boolean

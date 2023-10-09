@@ -1,13 +1,27 @@
 {
   "name": "expresso",
+  "type": "module",
   "version": "1.0.0",
   "description": "An expression to JsonLogic transpiler",
-  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "main": "index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./post": {
+      "import": "./dist/post.mjs",
+      "require": "./dist/post.cjs"
+    }
+  },
   "repository": "https://github.com/LukeCSamuel/expresso",
   "author": "Luke Caswell Samuel <7198484+LukeCSamuel@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "vite",
+    "build": "vite build",
     "dev": "vitest",
     "test": "vitest run --coverage",
     "lint": "eslint . --fix"
@@ -20,6 +34,7 @@
     "eslint-plugin-unicorn": "^48.0.1",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.6.0",
     "vitest": "^0.34.6"
   }
 }
