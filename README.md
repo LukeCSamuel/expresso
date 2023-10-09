@@ -1,32 +1,124 @@
 # Expresso
 
-A transpiler to convert human-readable expressions into JsonLogic.
+A compiler (transpiler) to convert human-readable expressions into JsonLogic.
 
-## Steps
+## Expresso Language
 
-The compiler is implemented in 4 distinct steps:
+The "Expresso" language provides a more human-readable syntax for basic expressions than JsonLogic.  It supports a subset of operations provided by JsonLogic.
 
-### Tokenization
+### Literals
 
-The `tokenize` function turns an input string into a token list according to the tokens defined in `src/lexer/tokens`.
+The following literals are supported:
 
-### Parsing
+ - Numbers: in decimal e.g. `1.5` or hex e.g. `0xFFF`
+ - Strings: using single quotes e.g. `'hello'` or double e.g. `"hello"`
+ - Boolean: `true` or `false`
+ - Null: `null`
 
-Grammars defined in `src/syntax/grammars` are matched to the tokens from the previous step to construct an abstract syntax tree.
+### Variables
 
-### Transformation
+Any non-reserved word compiles into a `var` rule:
 
-The `transform` function accepts an abstract syntax tree and creates a semantic expression tree using visitors defined in `src/transform/transform`.
+```
+foo
+=== becomes ===
+{ "var": "foo" }
+```
 
-### Generation
+### Logical Operators
 
-TODO
+Logical operators are implemented using the keywords `and`, `or`, and `not`:
 
-## Grammars
+```
+not foo and bar or baz
+=== becomes ===
+{
+  "or": [
+    {
+      "and": [
+        {
+          "!": [
+            { "var": "foo" }
+          ]
+        },
+        { "var": "bar" },  
+      ] 
+    },
+    { "var": "baz" }
+  ]
+}
+```
 
-Nearly all grammars belong to one of two categories: Left Fragments and Right Fragments.  Grammars must not be left-recursive, and splitting them into these fragments facilitates that.  A Left Fragment then can be any grammar that starts with a specific token, such as an identifier, group clause, or a unary prefix.  A Right Fragment is a grammar that is applied to the expression on its left, such as a binary operator, function application, or member access.  The combination of a Left Fragment and zero or more Right Fragments constitutes an Expression.
+### Arithmetic Operators
 
-To maintain consistency and reduce complexity, fragments should adhere to the following rules:
- - A Left Fragment may match an Expression as any of its children
- - A Right Fragment may only match a Left Fragment as a direct child
- - Chaining of Right Fragments (e.g. `a + b + c`) is handled by the Expression grammar
+Basic arithmetic operators are supported using their standard symbols: `+`, `-`, `*`, and `/`. Expressions can be grouped using parenthesis to modify their order of evaluation:
+
+```
+1 * (2 + 3)
+=== becomes ===
+{
+  "*": [
+    1,
+    {
+      "+": [
+        2,
+        3
+      ]
+    }
+  ]
+}
+```
+
+### Lists
+
+A list of expressions can be defined using square brackets:
+
+```
+[1 + 2, foo]
+=== becomes ===
+[
+  {
+    "+": [1, 2]
+  },
+  {
+    "var": "foo"
+  }
+]
+```
+
+## Compilation
+
+Import `expresso` and call it with the string expression that should be transpiled to JsonLogic:
+
+```ts
+import { expresso } from 'expresso';
+
+const { jsonLogic } = expresso('foo = "bar"');
+console.log(jsonLogic); // "{ '===': [{ var: 'foo' }, 'bar']}"
+```
+
+### Error Treatment
+
+You can pass options to `expresso` to indicate how it handles errors:
+
+```ts
+expresso('foo = "bar"', {
+  logErrors: true, // Log errors to the console
+  throwParseErrors: true, // Throw only parsing errors, which occur when the input is invalid
+  throwAllErrors: true, // Throw any error encountered while running the compiler
+});
+```
+
+### Post-Compilation Transforms
+
+Expresso supports post-compilation transform functions to run on the generated output.  The can be specified in an array in the options object.
+
+Out of the box, expresso provides the `treatIdentifiersAsArrays` transform function that wraps identifiers in `some` rules if they are part of a boolean rule.  This transform is experimental, so be careful when using it.
+
+```ts
+import { treatIdentifiersAsArrays } from 'expresso';
+
+expresso('foo in [1, 2, 3]', {
+  postCompile: [treatIdentifiersAsArrays],
+});
+```

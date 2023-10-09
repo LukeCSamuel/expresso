@@ -240,6 +240,11 @@
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.6.tgz#7b489e8baf393d5dd1266fb203ddd4ea941259e6"
   integrity sha512-VOVRLM1mBxIRxydiViqPcKn6MIxZytrbMpd6RJLIWKxUNr3zux8no0Oc7kJx0WAPIitgZ0gkrDS+btlqQpubpw==
 
+"@types/json-logic-js@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/json-logic-js/-/json-logic-js-2.0.3.tgz#601740a0f2f7d5b066e66ada11aab3911211d478"
+  integrity sha512-UC/vdLtQUN2u9vL4pVcCpLTbIF7ZIEeKfV0vYjrlCTIfGJAXN9jCE80PlECm/OZUlq7tx7Mv0e6OA+0dU4w0Bg==
+
 "@types/json-schema@^7.0.12":
   version "7.0.13"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.13.tgz#02c24f4363176d2d18fc8b70b9f3c54aba178a85"

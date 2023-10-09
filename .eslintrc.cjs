@@ -23,7 +23,9 @@ module.exports = {
     'eol-last': ['error', 'always'],
     'quotes': ['error', 'single', { allowTemplateLiterals: true }],
     'semi': ['error', 'always'],
+    'unicorn/no-for-loop': 'off',
     'unicorn/prefer-ternary': ['error', 'only-single-line'],
     'unicorn/prevent-abbreviations': 'off',
+    'unicorn/switch-case-braces': 'off',
   },
 };
