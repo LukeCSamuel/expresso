@@ -1,6 +1,6 @@
 # Expresso
 
-A compiler (transpiler) to convert human-readable expressions into JsonLogic.
+A compiler (transpiler) to convert human-readable expressions into [JsonLogic](https://jsonlogic.com/).
 
 ## Expresso Language
 
@@ -88,10 +88,19 @@ A list of expressions can be defined using square brackets:
 
 ## Compilation
 
+Install `@lukecsamuel/expresso`:
+
+```bash
+npm i @lukecsamuel/expresso
+```
+```bash
+yarn add @lukecsamuel/expresso
+```
+
 Import `expresso` and call it with the string expression that should be transpiled to JsonLogic:
 
 ```ts
-import { expresso } from 'expresso';
+import { expresso } from '@lukecsamuel/expresso';
 
 const { jsonLogic } = expresso('foo = "bar"');
 console.log(jsonLogic); // "{ '===': [{ var: 'foo' }, 'bar']}"
@@ -116,7 +125,7 @@ Expresso supports post-compilation transform functions to run on the generated o
 Out of the box, expresso provides the `treatIdentifiersAsArrays` transform function that wraps identifiers in `some` rules if they are part of a boolean rule.  This transform is experimental, so be careful when using it.
 
 ```ts
-import { treatIdentifiersAsArrays } from 'expresso/post';
+import { treatIdentifiersAsArrays } from '@lukecsamuel/expresso/post';
 
 expresso('foo in [1, 2, 3]', {
   postCompile: [treatIdentifiersAsArrays],
