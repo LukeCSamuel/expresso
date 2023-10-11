@@ -1,7 +1,7 @@
 import { JsonLogicSome, JsonLogicVar, RulesLogic } from 'json-logic-js';
 
 function isIdentifierRule (rule: RulesLogic): rule is JsonLogicVar {
-  return typeof rule === 'object' && 'var' in rule;
+  return !!rule && typeof rule === 'object' && 'var' in rule;
 }
 
 function isSuitableParent (rule: RulesLogic): boolean {
@@ -48,7 +48,7 @@ export function treatIdentifiersAsArrays (rule: RulesLogic, parent?: RulesLogic 
         parentCopy[key] = { var: '' };
       }
     }
-  } else if (typeof rule === 'object') {
+  } else if (!!rule && typeof rule === 'object') {
     // recurse over the rule's operands
     for (const value of Object.values(rule)) {
       if (Array.isArray(value)) {
