@@ -1,21 +1,22 @@
 {
   "name": "@lukecsamuel/expresso",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An expression to JsonLogic transpiler",
   "files": [
     "dist"
   ],
   "main": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./post": {
       "import": "./dist/post.mjs",
-      "require": "./dist/post.cjs"
+      "require": "./dist/post.cjs",
+      "types": "./dist/post.d.ts"
     }
   },
   "repository": "https://github.com/LukeCSamuel/expresso",
