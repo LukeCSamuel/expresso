@@ -23,3 +23,4 @@ function createUnaryVisitor<TAbstract extends AbstractSyntaxType, TExpression ex
 export const LogicalNegationVisitor = createUnaryVisitor('logicalNegation');
 export const NumericalNegationVisitor = createUnaryVisitor('numericalNegation');
 export const NumericalCoercionVisitor = createUnaryVisitor('numericalCoercion');
+export const MissingVisitor = createUnaryVisitor('missing');

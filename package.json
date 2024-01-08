@@ -1,22 +1,20 @@
 {
   "name": "@lukecsamuel/expresso",
   "type": "module",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "An expression to JsonLogic transpiler",
   "files": [
-    "dist"
+    "./"
   ],
-  "main": "./dist/index.mjs",
+  "main": "./index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "import": "./index.mjs",
+      "require": "./index.cjs"
     },
     "./post": {
-      "import": "./dist/post.mjs",
-      "require": "./dist/post.cjs",
-      "types": "./dist/post.d.ts"
+      "import": "./post.mjs",
+      "require": "./post.cjs"
     }
   },
   "repository": "https://github.com/LukeCSamuel/expresso",
@@ -26,7 +24,8 @@
     "build": "vite build",
     "dev": "vitest",
     "test": "vitest run --coverage",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "send": "yarn build && cp package.json dist/package.json && npm publish ./dist"
   },
   "devDependencies": {
     "@types/json-logic-js": "^2.0.3",

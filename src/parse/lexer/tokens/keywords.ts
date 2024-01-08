@@ -9,6 +9,7 @@ export const keywords = [
   'true',
   'false',
   'null',
+  'missing',
 ] as const;
 
 const exp = new RegExp(`^(?:${keywords.join('|')})`, 'i');

@@ -6,6 +6,7 @@ import { IdentifierVisitor } from './visitors/identifier';
 import { ListVisitor } from './visitors/list';
 import { LiteralVisitor } from './visitors/literal';
 import { LogicalNegationVisitor } from './visitors/logical-negation';
+import { MissingVisitor } from './visitors/missing';
 import { NumericalCoercionVisitor } from './visitors/numerical-coercion';
 import { NumericalNegationVisitor } from './visitors/numerical-negation';
 
@@ -18,6 +19,7 @@ const registry = new VisitorRegistry()
   .register(LogicalNegationVisitor)
   .register(NumericalNegationVisitor)
   .register(NumericalCoercionVisitor)
+  .register(MissingVisitor)
   // Binary Operators
   .register(AdditionVisitor)
   .register(SubtractionVisitor)

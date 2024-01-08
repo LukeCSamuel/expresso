@@ -7,7 +7,7 @@ import { LeftFragment } from './left-fragment';
 import { Addition, Conjunction, Contains, Disjunction, Division, Equals, GreaterThan, GreaterThanOrEqual, In, LessThan, LessThanOrEqual, Multiplication, Subtraction } from './operators/binary';
 import { Group } from './operators/group';
 import { List } from './operators/list';
-import { LogicalNegation, NumericalCoercion, NumericalNegation } from './operators/unary-prefix';
+import { LogicalNegation, NumericalCoercion, NumericalNegation, Missing } from './operators/unary-prefix';
 import { RightFragment } from './right-fragment';
 import { GrammarBoolean } from './value/boolean';
 import { Identifier } from './value/identifier';
@@ -47,6 +47,7 @@ export type AbstractSyntaxType =
   | AbstractSyntaxNodeType<typeof LogicalNegation>
   | AbstractSyntaxNodeType<typeof NumericalNegation>
   | AbstractSyntaxNodeType<typeof NumericalCoercion>
+  | AbstractSyntaxNodeType<typeof Missing>
   // Right Fragment Operators
   | AbstractSyntaxNodeType<typeof Addition>
   | AbstractSyntaxNodeType<typeof Subtraction>

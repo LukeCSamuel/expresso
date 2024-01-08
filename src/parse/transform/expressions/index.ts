@@ -28,6 +28,7 @@ export const unaryExpressionTypes = [
   'logicalNegation',
   'numericalNegation',
   'numericalCoercion',
+  'missing',
 ] as const;
 
 type AllUnaryExpressionHelper<T> = T extends (typeof unaryExpressionTypes)[number] ? UnaryExpression<T> : never;

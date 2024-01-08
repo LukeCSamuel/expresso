@@ -7,6 +7,7 @@ const precedence: Record<Expression['type'], number> = {
   list: 0,
   numericalNegation: 20,
   numericalCoercion: 20,
+  missing: 20,
   logicalNegation: 30,
   multiplication: 40,
   division: 40,

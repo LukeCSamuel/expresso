@@ -1,4 +1,4 @@
-import { RulesLogic } from 'json-logic-js';
+import type { RulesLogic } from 'json-logic-js';
 
 export * from './treat-identifiers-as-arrays';
 
