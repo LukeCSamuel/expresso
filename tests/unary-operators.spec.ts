@@ -10,10 +10,7 @@ describe('unary operators', () => {
     it('applies the "missing" operator correctly', () => {
       const { jsonLogic } = expresso('missing foo', options);
       expect(jsonLogic).toEqual({
-        none: [
-          { missing: [{ var: 'foo' }] },
-          true,
-        ],
+        '!!': { missing: 'foo' },
       });
     });
   });
