@@ -4,9 +4,10 @@ import { Grammar } from '../utils/grammar';
 import { Expression } from './Expression';
 import { Lambda } from './lambda';
 import { LeftFragment } from './left-fragment';
-import { Addition, Conjunction, Contains, Disjunction, Division, Equals, GreaterThan, GreaterThanOrEqual, In, LessThan, LessThanOrEqual, Multiplication, Subtraction } from './operators/binary';
+import { Addition, Conjunction, Contains, Disjunction, Division, Equals, GreaterThan, GreaterThanOrEqual, In, LessThan, LessThanOrEqual, Multiplication, NotEquals, Subtraction } from './operators/binary';
 import { Group } from './operators/group';
 import { List } from './operators/list';
+import { LogicalCoercion } from './operators/unary-postfix';
 import { LogicalNegation, NumericalCoercion, NumericalNegation, Missing } from './operators/unary-prefix';
 import { RightFragment } from './right-fragment';
 import { GrammarBoolean } from './value/boolean';
@@ -56,10 +57,12 @@ export type AbstractSyntaxType =
   | AbstractSyntaxNodeType<typeof Conjunction>
   | AbstractSyntaxNodeType<typeof Disjunction>
   | AbstractSyntaxNodeType<typeof Equals>
+  | AbstractSyntaxNodeType<typeof NotEquals>
   | AbstractSyntaxNodeType<typeof LessThan>
   | AbstractSyntaxNodeType<typeof LessThanOrEqual>
   | AbstractSyntaxNodeType<typeof GreaterThan>
   | AbstractSyntaxNodeType<typeof GreaterThanOrEqual>
   | AbstractSyntaxNodeType<typeof In>
   | AbstractSyntaxNodeType<typeof Contains>
+  | AbstractSyntaxNodeType<typeof LogicalCoercion>
 

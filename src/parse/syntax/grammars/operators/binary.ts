@@ -22,6 +22,9 @@ export const Disjunction = define('disjunction')
 export const Equals = define('equals')
   .as(['operator', '='], () => LeftFragment);
 
+export const NotEquals = define('notEquals')
+  .as(['operator', '!'], ['operator', '='], () => LeftFragment);
+
 export const LessThan = define('lessThan')
   .as(['operator', '<'], () => LeftFragment);
 

@@ -38,6 +38,7 @@ export const DivisionVisitor = createBinaryVisitor('division');
 export const ConjunctionVisitor = createBinaryVisitor('conjunction');
 export const DisjunctionVisitor = createBinaryVisitor('disjunction');
 export const EqualsVisitor = createBinaryVisitor('equals');
+export const NotEqualsVisitor = createBinaryVisitor('notEquals');
 export const LessThanVisitor = createBinaryVisitor('lessThan');
 export const LessThanOrEqualVisitor = createBinaryVisitor('lessThanOrEqual');
 export const GreaterThanVisitor = createBinaryVisitor('greaterThan');
