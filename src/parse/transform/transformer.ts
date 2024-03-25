@@ -4,9 +4,10 @@ import { VisitorRegistry } from './visitor-registry';
 import { ExpressionVisitor } from './visitors/expression-visitor';
 import { LambdaVisitor } from './visitors/lambda-visitor';
 import { LeftFragmentVisitor } from './visitors/left-fragment-visitor';
-import { AdditionVisitor, ConjunctionVisitor, ContainsVisitor, DisjunctionVisitor, DivisionVisitor, EqualsVisitor, GreaterThanOrEqualVisitor, GreaterThanVisitor, InVisitor, LessThanOrEqualVisitor, LessThanVisitor, MultiplicationVisitor, SubtractionVisitor } from './visitors/operators/binary-visitor';
+import { AdditionVisitor, ConjunctionVisitor, ContainsVisitor, DisjunctionVisitor, DivisionVisitor, EqualsVisitor, GreaterThanOrEqualVisitor, GreaterThanVisitor, InVisitor, LessThanOrEqualVisitor, LessThanVisitor, MultiplicationVisitor, NotEqualsVisitor, SubtractionVisitor } from './visitors/operators/binary-visitor';
 import { GroupVisitor } from './visitors/operators/group-visitor';
 import { ListVisitor } from './visitors/operators/list-visitor';
+import { LogicalCoercionVisitor } from './visitors/operators/unary-postfix-visitor';
 import { LogicalNegationVisitor, MissingVisitor, NumericalCoercionVisitor, NumericalNegationVisitor } from './visitors/operators/unary-visitor';
 import { RightFragmentVisitor } from './visitors/right-fragment-visitor';
 import { BooleanVisitor } from './visitors/value/boolean-visitor';
@@ -33,6 +34,7 @@ const registry = new VisitorRegistry()
   .register(GroupVisitor)
   .register(ListVisitor)
   .register(LogicalNegationVisitor)
+  .register(LogicalCoercionVisitor)
   .register(NumericalNegationVisitor)
   .register(NumericalCoercionVisitor)
   .register(MissingVisitor)
@@ -44,6 +46,7 @@ const registry = new VisitorRegistry()
   .register(ConjunctionVisitor)
   .register(DisjunctionVisitor)
   .register(EqualsVisitor)
+  .register(NotEqualsVisitor)
   .register(LessThanVisitor)
   .register(LessThanOrEqualVisitor)
   .register(GreaterThanVisitor)

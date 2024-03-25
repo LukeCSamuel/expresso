@@ -13,6 +13,7 @@ export const binaryExpressionTypes = [
   'conjunction',
   'disjunction',
   'equals',
+  'notEquals',
   'lessThan',
   'lessThanOrEqual',
   'greaterThan',
@@ -26,6 +27,7 @@ export type AllBinaryExpression = AllBinaryExpressionHelper<(typeof binaryExpres
 
 export const unaryExpressionTypes = [
   'logicalNegation',
+  'logicalCoercion',
   'numericalNegation',
   'numericalCoercion',
   'missing',

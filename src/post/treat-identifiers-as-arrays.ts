@@ -15,6 +15,7 @@ function isSuitableParent (rule: RulesLogic): boolean {
     || '>' in rule
     || '>=' in rule
     || 'in' in rule
+    || '!!' in rule
   );
 }
 
