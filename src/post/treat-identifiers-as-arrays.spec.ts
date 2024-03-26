@@ -32,4 +32,14 @@ describe('treatIdentifiersAsArrays', () => {
       some: [{ var: 'foo' }, { '===': [{ var: '' }, 'bar'] }],
     });
   });
+
+  it('handles "foo exists"', () => {
+    const expression = {
+      '!!': [{ var: 'foo' }],
+    } as RulesLogic;
+    treatIdentifiersAsArrays(expression);
+    expect(expression).toEqual({
+      some: [{ var: 'foo' }, { '!!': [{ var: '' }] }],
+    });
+  });
 });
