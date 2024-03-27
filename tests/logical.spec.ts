@@ -24,11 +24,29 @@ describe('logical operators', () => {
     });
 
     it('applies precedence correctly', () => {
-      const { jsonLogic } = expresso('not foo exists', options);
+      const { jsonLogic } = expresso('not foo exists and bar exists', options);
       expect(jsonLogic).toEqual({
-        '!': [{
-          '!!': [{ var: 'foo' }],
-        }],
+        and: [
+          { '!': [{ '!!': [{ var: 'foo' }] }] },
+          { '!!': [{ var: 'bar' }] },
+        ],
+      });
+    });
+  });
+
+  describe('and', () => {
+    it('applies the "and" operator correctly', () => {
+      const { jsonLogic } = expresso('foo and bar and baz', options);
+      expect(jsonLogic).toEqual({
+        and: [
+          {
+            and: [
+              { var: 'foo' },
+              { var: 'bar' },
+            ],
+          },
+          { var: 'baz' },
+        ],
       });
     });
   });

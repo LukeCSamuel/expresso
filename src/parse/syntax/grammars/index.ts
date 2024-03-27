@@ -9,6 +9,7 @@ import { Group } from './operators/group';
 import { List } from './operators/list';
 import { LogicalCoercion } from './operators/unary-postfix';
 import { LogicalNegation, NumericalCoercion, NumericalNegation, Missing } from './operators/unary-prefix';
+import { PostfixFragment } from './postfix-fragment';
 import { RightFragment } from './right-fragment';
 import { GrammarBoolean } from './value/boolean';
 import { Identifier } from './value/identifier';
@@ -34,6 +35,7 @@ export type AbstractSyntaxType =
   | AbstractSyntaxNodeType<Expression>
   | AbstractSyntaxNodeType<Lambda>
   | AbstractSyntaxNodeType<LeftFragment>
+  | AbstractSyntaxNodeType<PostfixFragment>
   | AbstractSyntaxNodeType<RightFragment>
   // Values
   | AbstractSyntaxNodeType<GrammarBoolean>
